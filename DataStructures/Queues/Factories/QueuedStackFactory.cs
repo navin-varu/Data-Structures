@@ -6,13 +6,13 @@ using System.Text;
 
 namespace DataStructures.Queues.Factories
 {
-    class QueuedStackFactory : IQueueFactory
+    class QueuedStackFactory<T> : IQueueFactory<T>
     {
         public QueueBase QueueBase => QueueBase.Stack;
 
-        public Queue CreateQueue(int size)
+        public AbstractQueue<T> CreateQueue(int size)
         {
-            return new QueuedStack(size);
+            return new QueuedStack<T>(size);
         }
     }
 }

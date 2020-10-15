@@ -6,13 +6,13 @@ using System.Text;
 
 namespace DataStructures.LinkedLists.Factories
 {
-    class CircularLinkedListFactory : ILinkedListFactory
+    class CircularLinkedListFactory<T> : ILinkedListFactory<T>
     {
         public LinkedListType LinkedListType => LinkedListType.Circular;
 
-        public LinkedList CreateLinkedList()
+        public AbstarctLinkedList<T> CreateLinkedList()
         {
-            return new CircularLinkedList();
+            return new CircularLinkedList<T>();
         }
     }
 }

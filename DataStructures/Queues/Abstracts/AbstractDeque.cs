@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace DataStructures.Queues.Abstracts
 {
-    public abstract class Deque : Queue, IDequeOperations
+    public abstract class AbstractDeque<T> : AbstractQueue<T>, IDequeOperations<T>
     {
-        public abstract string DequeueRear();
-        public abstract void EnqueueFront(string item);
-        public abstract string PeakRear();
+        public abstract T DequeueRear();
+        public abstract void EnqueueFront(T item);
+        public abstract T PeakRear();
     }
 }

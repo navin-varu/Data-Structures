@@ -13,18 +13,17 @@ namespace DataStructures.Stacks.Abstracts
         Array,
         LinkedList
     }
-    public abstract class Stack : IStackOperations
+    public abstract class AbstractStack<T> : IStackOperations<T>
     {
         protected int top = -1;
         public abstract int Size { get; }
         public abstract string StackBaseType { get; }
         public abstract void Clear();
-        public abstract string Display();
         public abstract IEnumerator GetEnumerator();
         public abstract bool IsEmpty();
         public abstract bool IsFull();
-        public abstract string Peak();
-        public abstract string Pop();
-        public abstract void Push(string item);
+        public abstract T Peak();
+        public abstract T Pop();
+        public abstract void Push(T item);
     }
 }

@@ -9,16 +9,17 @@ using System.Threading.Tasks;
 
 namespace DataStructures.Stacks.Factories
 {
-    public sealed class StackFactory
+    public sealed class StackFactory<T>
     {
-        private readonly Dictionary<StackBase, IStackFactory> _factories;
-        private static readonly Lazy<StackFactory> _stackFactory = new Lazy<StackFactory>(() => new StackFactory());
+        private readonly Dictionary<StackBase, IStackFactory<T>> _factories;
+        private static readonly Lazy<StackFactory<T>> _stackFactory = new Lazy<StackFactory<T>>(() => new StackFactory<T>());
+
         public StackFactory()
         {
-            _factories = new Dictionary<StackBase, IStackFactory>();
+            _factories = new Dictionary<StackBase, IStackFactory<T>>();
             InitializeFactories();
         }
-        public static StackFactory GetFactory
+        public static StackFactory<T> GetFactory
         {
             get
             {
@@ -30,9 +31,9 @@ namespace DataStructures.Stacks.Factories
             Type[] factoryTypes = Assembly.GetExecutingAssembly().GetTypes();
             foreach (Type factoryType in factoryTypes)
             {
-                if (factoryType.GetInterface(typeof(IStackFactory).ToString()) != null)
+                if (factoryType.GetInterface(typeof(IStackFactory<T>).ToString()) != null)
                 {
-                    IStackFactory stackFactory = Activator.CreateInstance(factoryType) as IStackFactory;
+                    IStackFactory<T> stackFactory = Activator.CreateInstance(factoryType) as IStackFactory<T>;
                     if (stackFactory != null)
                     {
                         if (!_factories.ContainsKey(stackFactory.StackBase))
@@ -44,20 +45,20 @@ namespace DataStructures.Stacks.Factories
             }
         }
 
-        public IStackFactory Load(StackBase stackBase)
+        public IStackFactory<T> Load(StackBase stackBase)
         {
             return this._factories[stackBase];
         }
-        public static Stack GetStack(StackBase stackBase, int size)
+        public static AbstractStack<T> GetStack(StackBase stackBase, int size)
         {
-            Stack stack;
+            AbstractStack<T> stack;
             switch (stackBase)
             {
                 case StackBase.Array:
-                    stack = new StackedArray(size);
+                    stack = new StackedArray<T>(size);
                     break;
                 case StackBase.LinkedList:
-                    stack = new StackedList(size);
+                    stack = new StackedList<T>(size);
                     break;
                 default:
                     stack = null;

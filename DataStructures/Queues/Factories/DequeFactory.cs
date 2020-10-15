@@ -11,15 +11,15 @@ namespace DataStructures.Queues.Factories
     {
         CircularArray
     }
-    public static class DequeFactory
+    public static class DequeFactory<T>
     {
-        public static Deque GetDeque(DequeBase dequeBase, int size)
+        public static AbstractDeque<T> GetDeque(DequeBase dequeBase, int size)
         {
-            Deque dueue;
+            AbstractDeque<T> dueue;
             switch (dequeBase)
             {
                 case DequeBase.CircularArray:
-                    dueue = new DequeCircularArray(size);
+                    dueue = new DequeCircularArray<T>(size);
                     break;
                 default:
                     dueue = null;

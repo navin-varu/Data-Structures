@@ -5,9 +5,9 @@ using System.Text;
 
 namespace DataStructures.Stacks.Factories.OperationContracts
 {
-    public interface IStackFactory
+    public interface IStackFactory<T>
     {
         StackBase StackBase { get; }
-        Stack CreateStack(int size);
+        AbstractStack<T> CreateStack(int size);
     }
 }

@@ -10,9 +10,9 @@ using DataStructures.LinkedLists.Nodes;
 
 namespace DataStructures.LinkedLists
 {
-    internal class CircularLinkedList : LinkedList
+    internal class CircularLinkedList<T> : AbstarctLinkedList<T>
     {
-        Node tail = null;
+        Node<T> tail = null;
         private readonly string _linkedListName = "Circular";
         public override string LinkedListName => _linkedListName;
 
@@ -21,41 +21,22 @@ namespace DataStructures.LinkedLists
             tail = null;
         }
 
-        public override void Create(string[] values)
+        public override void Create(T[] values)
         {
             tail = null;
-            foreach (string value in values)
+            foreach (T value in values)
             {
                 InsertLast(value);
             }
         }
 
-        public override string Display()
-        {
-            string linkedList = "";
-            if (tail == null)
-            {
-                throw new Exception(ListCommon.EMPTY_LIST);
-            }
-            else
-            {
-                Node current = tail.next;
-                do
-                {
-                    linkedList += current._data;
-                    linkedList += (current.next == tail.next) ? "." : "-->";
-                    current = current.next;
-                } while (current != tail.next);
-            }
-            return linkedList;
-        }
-
+       
         public override int GetLength()
         {
             int count = 0;
             if (tail != null)
             {
-                Node current = tail.next;
+                Node<T> current = tail.next;
                 do
                 {
                     count++;
@@ -65,10 +46,10 @@ namespace DataStructures.LinkedLists
             return count;
         }
 
-        public override string GetValueAt(int index)
+        public override T GetValueAt(int index)
         {
             Length = GetLength();
-            string value = "";
+            T value;
             if (tail == null)
             {
                 throw new Exception(ListCommon.EMPTY_LIST);
@@ -79,7 +60,7 @@ namespace DataStructures.LinkedLists
             }
             else
             {
-                Node current = tail.next;
+                Node<T> current = tail.next;
                 for (int i = 1; i < index; i++)
                 {
                     current = current.next;
@@ -89,7 +70,7 @@ namespace DataStructures.LinkedLists
             return value;
         }
 
-        public override void InsertAt(int index, string value)
+        public override void InsertAt(int index, T value)
         {
             Length = GetLength();
             if (index < 1 || index > Length)
@@ -112,8 +93,8 @@ namespace DataStructures.LinkedLists
                 }
                 else
                 {
-                    Node newNode = new Node(value);
-                    Node current = tail.next;
+                    Node<T> newNode = new Node<T>(value);
+                    Node<T> current = tail.next;
                     for (int i = 1; i < index - 1; i++)
                     {
                         current = current.next;
@@ -124,9 +105,9 @@ namespace DataStructures.LinkedLists
             }
         }
 
-        public override void InsertFirst(string value)
+        public override void InsertFirst(T value)
         {
-            Node newNode = new Node(value);
+            Node<T> newNode = new Node<T>(value);
             if (tail == null)
             {
                 newNode.next = newNode;
@@ -139,9 +120,9 @@ namespace DataStructures.LinkedLists
             }
         }
 
-        public override void InsertLast(string value)
+        public override void InsertLast(T value)
         {
-            Node newNode = new Node(value);
+            Node<T> newNode = new Node<T>(value);
             if (tail == null)
             {
                 newNode.next =  newNode;
@@ -182,8 +163,8 @@ namespace DataStructures.LinkedLists
                 }
                 else
                 {
-                    Node current = tail.next;
-                    Node previous = null;
+                    Node<T> current = tail.next;
+                    Node<T> previous = null;
                     for (int i = 1; i < index; i++)
                     {
                         previous = current;
@@ -214,8 +195,8 @@ namespace DataStructures.LinkedLists
             }
             else
             {
-                Node current = tail.next;
-                Node previous = null;
+                Node<T> current = tail.next;
+                Node<T> previous = null;
                 while (current.next != tail.next)
                 {
                     previous = current;
@@ -234,8 +215,8 @@ namespace DataStructures.LinkedLists
             }
             else if (tail.next != tail)
             {
-                Node current = tail.next;
-                Node previous = tail, nextNode = null;
+                Node<T> current = tail.next;
+                Node<T> previous = tail, nextNode = null;
                 while (current != tail.next)
                 {
                     nextNode = current.next;
@@ -250,7 +231,7 @@ namespace DataStructures.LinkedLists
 
         public override IEnumerator GetEnumerator()
         {
-            return new LinkedListEnumerator(this);
+            return new LinkedListEnumerator<T>(this);
         }
     }
 }

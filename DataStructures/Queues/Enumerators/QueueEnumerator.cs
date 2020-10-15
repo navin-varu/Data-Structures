@@ -5,14 +5,14 @@ using System.Text;
 
 namespace DataStructures.Queues.Enumerators
 {
-    internal class QueueEnumerator : IEnumerator
+    internal class QueueEnumerator<T> : IEnumerator
     {
-        private readonly string[] _queue;
+        private readonly T[] _queue;
         private int _front = 0, _rear = 0;
         private int _position;
         private Func<int, int> _incrementer;
         private Func<int, int, bool> _condition;
-        internal QueueEnumerator(string[] queue, int front, int rear
+        internal QueueEnumerator(T[] queue, int front, int rear
             , Func<int, int> incrementer, Func<int, int, bool> condition)
         {
             this._queue = queue;

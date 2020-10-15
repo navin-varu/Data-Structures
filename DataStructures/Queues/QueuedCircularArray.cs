@@ -6,15 +6,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Queue = DataStructures.Queues.Abstracts.Queue;
 
 namespace DataStructures.Queues
 {
-    internal class QueuedCircularArray : Queue
+    internal class QueuedCircularArray<T> : AbstractQueue<T>
     {
         private readonly string _queueBaseType = "CircularArray";
         private readonly int _size = 0;
-        private string[] _queue;
+        private T[] _queue;
         public override int Size => this._size;
         public override string QueueBaseType => this._queueBaseType;
         private QueuedCircularArray()
@@ -26,19 +25,19 @@ namespace DataStructures.Queues
         {
             this.front = this.rear = -1;
             this._size = size;
-            this._queue = new string[this._size];
+            this._queue = new T[this._size];
         }
 
         public override void Clear()
         {
             this.front = this.rear = -1;
             this._queue = null;
-            this._queue = new string[this._size];
+            this._queue = new T[this._size];
         }
 
-        public override string Dequeue()
+        public override T Dequeue()
         {
-            string item = "";
+            T item;
             if (this._size == 0)
             {
                 throw new Exception(QueueCommon.NOT_INITIALIZED);
@@ -60,29 +59,8 @@ namespace DataStructures.Queues
             return item;
         }
 
-        public override string Display()
-        {
-            string queue = "";
-            if (this._size == 0)
-            {
-                throw new Exception(QueueCommon.NOT_INITIALIZED);
-            }
-            else if (this.IsEmpty())
-            {
-                throw new Exception(QueueCommon.UNDER_FLOW);
-            }
-            else
-            {
-                for (int i = this.front; i != this.rear; i = (i + 1) % this._size)
-                {
-                    queue += this._queue[i];
-                    queue += (i == this.rear) ? "." : "-->";
-                }
-            }
-            return queue;
-        }
-
-        public override void Enqueue(string item)
+       
+        public override void Enqueue(T item)
         {
             if (this._size == 0)
             {
@@ -114,9 +92,9 @@ namespace DataStructures.Queues
             return (this.front == ((this.rear + 1) % this._size));
         }
 
-        public override string Peak()
+        public override T Peak()
         {
-            string item = "";
+            T item;
             if (this._size == 0)
             {
                 throw new Exception(QueueCommon.NOT_INITIALIZED);
@@ -134,7 +112,7 @@ namespace DataStructures.Queues
 
         public override IEnumerator GetEnumerator()
         {
-            return new QueueEnumerator(this._queue, this.front, this.rear, p => (p + 1) % this._size, (p, r) => p != r);
+            return new QueueEnumerator<T>(this._queue, this.front, this.rear, p => (p + 1) % this._size, (p, r) => p != r);
         }
     }
 }

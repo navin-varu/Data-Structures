@@ -14,19 +14,18 @@ namespace DataStructures.Queues.Abstracts
         LinkedList,
         Stack
     }
-    public abstract class Queue : IQueueOperations
+    public abstract class AbstractQueue<T> : IQueueOperations<T>
     {
         protected int front = -1;
         protected int rear = -1;
         public abstract int Size { get; }
         public abstract string QueueBaseType { get; }
         public abstract void Clear();
-        public abstract string Dequeue();
-        public abstract string Display();
-        public abstract void Enqueue(string item);
+        public abstract T Dequeue();
+        public abstract void Enqueue(T item);
         public abstract IEnumerator GetEnumerator();
         public abstract bool IsEmpty();
         public abstract bool IsFull();
-        public abstract string Peak();
+        public abstract T Peak();
     }
 }

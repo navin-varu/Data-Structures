@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace DataStructures.Queues.Factories
 {
-    public sealed class QueueFactory
+    public sealed class QueueFactory<T>
     {
-        private readonly Dictionary<QueueBase, IQueueFactory> _factories;
-        private static readonly Lazy<QueueFactory> _queueFactory = new Lazy<QueueFactory>(() => new QueueFactory());
+        private readonly Dictionary<QueueBase, IQueueFactory<T>> _factories;
+        private static readonly Lazy<QueueFactory<T>> _queueFactory = new Lazy<QueueFactory<T>>(() => new QueueFactory<T>());
         public QueueFactory()
         {
-            _factories = new Dictionary<QueueBase, IQueueFactory>();
+            _factories = new Dictionary<QueueBase, IQueueFactory<T>>();
             InitializeFactories();
         }
-        public static QueueFactory GetFactory
+        public static QueueFactory<T> GetFactory
         {
             get
             {
@@ -30,9 +30,9 @@ namespace DataStructures.Queues.Factories
             Type[] factoryTypes = Assembly.GetExecutingAssembly().GetTypes();
             foreach (Type factoryType in factoryTypes)
             {
-                if (factoryType.GetInterface(typeof(IQueueFactory).ToString()) != null)
+                if (factoryType.GetInterface(typeof(IQueueFactory<T>).ToString()) != null)
                 {
-                    IQueueFactory queueFactory = Activator.CreateInstance(factoryType) as IQueueFactory;
+                    IQueueFactory<T> queueFactory = Activator.CreateInstance(factoryType) as IQueueFactory<T>;
                     if (queueFactory != null)
                     {
                         if (!_factories.ContainsKey(queueFactory.QueueBase))
@@ -44,23 +44,23 @@ namespace DataStructures.Queues.Factories
             }
         }
 
-        public IQueueFactory Load(QueueBase queueBase)
+        public IQueueFactory<T> Load(QueueBase queueBase)
         {
             return this._factories[queueBase];
         }
-        public static Queue GetQueue(QueueBase queueBase, int size)
+        public static AbstractQueue<T> GetQueue(QueueBase queueBase, int size)
         {
-            Queue queue;
+            AbstractQueue<T> queue;
             switch (queueBase)
             {
                 case QueueBase.Array:
-                    queue = new QueuedArray(size);
+                    queue = new QueuedArray<T>(size);
                     break;
                 case QueueBase.CircularArray:
-                    queue = new QueuedCircularArray(size);
+                    queue = new QueuedCircularArray<T>(size);
                     break;
                 case QueueBase.LinkedList:
-                    queue = new QueuedList(size);
+                    queue = new QueuedList<T>(size);
                     break;
                 default:
                     queue = null;

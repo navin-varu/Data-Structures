@@ -5,12 +5,12 @@ using System.Text;
 
 namespace DataStructures.Stacks.Enumerators
 {
-    class StackEnumerator : IEnumerator
+    class StackEnumerator<T> : IEnumerator
     {
-        private readonly string[] _stack;
+        private readonly T[] _stack;
         private int _top = 0;
         private int _position;
-        public StackEnumerator(string[] stack,int top)
+        public StackEnumerator(T[] stack,int top)
         {
             this._stack = stack;
             this._top = top;

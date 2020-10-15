@@ -5,9 +5,9 @@ using System.Text;
 
 namespace DataStructures.Queues.Factories.OperationContracts
 {
-    public interface IQueueFactory
+    public interface IQueueFactory<T>
     {
         QueueBase QueueBase { get; }
-        Queue CreateQueue(int size);
+        AbstractQueue<T> CreateQueue(int size);
     }
 }

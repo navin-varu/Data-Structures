@@ -8,15 +8,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Queue = DataStructures.Queues.Abstracts.Queue;
 
 namespace DataStructures.Queues
 {
-    internal class QueuedList : Queue
+    internal class QueuedList<T> : AbstractQueue<T>
     {
         private readonly string _queueBaseType = "LinkedList";
         private readonly int _size = 0;
-        private LinkedList _queue;
+        private AbstarctLinkedList<T> _queue;
         public override int Size => this._size;
         public override string QueueBaseType => this._queueBaseType;
         private QueuedList()
@@ -27,16 +26,16 @@ namespace DataStructures.Queues
         public QueuedList(int size)
         {
             this._size = size;
-            this._queue = LinkedListFactory.GetLinkedList(LinkedListType.Single);
+            this._queue = LinkedListFactory<T>.GetLinkedList(LinkedListType.Single);
         }
         public override void Clear()
         {
             this._queue.Clear();
         }
 
-        public override string Dequeue()
+        public override T Dequeue()
         {
-            string item = "";
+            T item;
             if (this._queue == null)
             {
                 throw new Exception(QueueCommon.NOT_INITIALIZED);
@@ -51,27 +50,9 @@ namespace DataStructures.Queues
                 this._queue.RemoveFirst();
             }
             return item;
-        }
+        }        
 
-        public override string Display()
-        {
-            string queue = "";
-            if (this._queue == null)
-            {
-                throw new Exception(QueueCommon.NOT_INITIALIZED);
-            }
-            else if (this._queue.IsEmpty())
-            {
-                throw new Exception(QueueCommon.UNDER_FLOW);
-            }
-            else
-            {
-                queue = this._queue.Display();
-            }
-            return queue;
-        }
-
-        public override void Enqueue(string item)
+        public override void Enqueue(T item)
         {
             if (this._queue == null)
             {
@@ -97,9 +78,9 @@ namespace DataStructures.Queues
             return (this._queue.GetLength() == this._size);
         }
 
-        public override string Peak()
+        public override T Peak()
         {
-            string item = "";
+            T item;
             if (this._queue == null)
             {
                 throw new Exception(QueueCommon.NOT_INITIALIZED);
@@ -117,7 +98,7 @@ namespace DataStructures.Queues
 
         public override IEnumerator GetEnumerator()
         {
-            return new LinkedListEnumerator(this._queue);
+            return new LinkedListEnumerator<T>(this._queue);
         }
     }
 }

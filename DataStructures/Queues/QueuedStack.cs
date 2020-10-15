@@ -7,17 +7,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Queue = DataStructures.Queues.Abstracts.Queue;
-using Stack = DataStructures.Stacks.Abstracts.Stack;
 
 namespace DataStructures.Queues
 {
-    internal class QueuedStack : Queue
+    internal class QueuedStack<T> : AbstractQueue<T>
     {
         private readonly string _queueBaseType = "Stack";
         private readonly int _size = 0;
-        private Stack _enqueueStack;
-        private Stack _dequeueStack;
+        private AbstractStack<T> _enqueueStack;
+        private AbstractStack<T> _dequeueStack;
         public override int Size => this._size;
         public override string QueueBaseType => this._queueBaseType;
         private QueuedStack()
@@ -27,8 +25,8 @@ namespace DataStructures.Queues
         public QueuedStack(int size)
         {
             this._size = size;
-            this._enqueueStack = StackFactory.GetStack(StackBase.Array, size);
-            this._dequeueStack = StackFactory.GetStack(StackBase.Array, size);
+            this._enqueueStack = StackFactory<T>.GetStack(StackBase.Array, size);
+            this._dequeueStack = StackFactory<T>.GetStack(StackBase.Array, size);
         }
         public override void Clear()
         {
@@ -36,9 +34,9 @@ namespace DataStructures.Queues
             this._dequeueStack.Clear();
         }
 
-        public override string Dequeue()
+        public override T Dequeue()
         {
-            string item = "";
+            T item;
             if (this._enqueueStack == null || this._dequeueStack == null)
             {
                 throw new Exception(QueueCommon.NOT_INITIALIZED);
@@ -56,27 +54,8 @@ namespace DataStructures.Queues
             return item;
         }
 
-        public override string Display()
-        {
-            string queue = "";
-            if (this._enqueueStack == null || this._dequeueStack == null)
-            {
-                throw new Exception(QueueCommon.NOT_INITIALIZED);
-            }
-            else if (IsEmpty())
-            {
-                throw new Exception(QueueCommon.UNDER_FLOW);
-            }
-            else
-            {
-                CopyStack(_enqueueStack, _dequeueStack);
-                queue = this._enqueueStack.Display();
-                CopyStack(_dequeueStack, _enqueueStack);                
-            }
-            return queue;
-        }
-
-        public override void Enqueue(string item)
+        
+        public override void Enqueue(T item)
         {
             if (this._enqueueStack == null)
             {
@@ -102,9 +81,9 @@ namespace DataStructures.Queues
             return this._enqueueStack.IsFull();
         }
 
-        public override string Peak()
+        public override T Peak()
         {
-            string item = "";
+            T item;
             if (this._enqueueStack == null || this._dequeueStack == null)
             {
                 throw new Exception(QueueCommon.NOT_INITIALIZED);
@@ -122,7 +101,7 @@ namespace DataStructures.Queues
             return item;
         }
 
-        private void CopyStack(Stack source,Stack target)
+        private void CopyStack(AbstractStack<T> source,AbstractStack<T> target)
         {
             while (!source.IsEmpty())
             {

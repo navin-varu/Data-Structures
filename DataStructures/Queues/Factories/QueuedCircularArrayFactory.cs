@@ -6,13 +6,13 @@ using System.Text;
 
 namespace DataStructures.Queues.Factories
 {
-    class QueuedCircularArrayFactory : IQueueFactory
+    class QueuedCircularArrayFactory<T> : IQueueFactory<T>
     {
         public QueueBase QueueBase => QueueBase.CircularArray;
 
-        public Queue CreateQueue(int size)
+        public AbstractQueue<T> CreateQueue(int size)
         {
-            return new QueuedCircularArray(size);
+            return new QueuedCircularArray<T>(size);
         }
     }
 }

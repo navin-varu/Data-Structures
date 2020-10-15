@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace DataStructures.LinkedLists.Nodes
 {
-    internal class Node
+    internal class Node<T>
     {
-        internal string _data;
-        internal Node next;
-        public Node(string data)
+        internal T _data;
+        internal Node<T> next;
+        public Node(T data)
         {
             _data = data;
             next = null;
         }
     }
 
-    internal class DoubleNode : Node
+    internal class DoubleNode<T> : Node<T>
     {
-        internal Node previous;
-        public DoubleNode(string data) : base(data)
+        internal Node<T> previous;
+        public DoubleNode(T data) : base(data)
         {
             previous = null;
         }

@@ -6,13 +6,13 @@ using System.Text;
 
 namespace DataStructures.LinkedLists.Factories
 {
-    class DoubleLinkedListFactory : ILinkedListFactory
+    class DoubleLinkedListFactory<T> : ILinkedListFactory<T>
     {
         public LinkedListType LinkedListType => LinkedListType.Double;
 
-        public LinkedList CreateLinkedList()
+        public AbstarctLinkedList<T> CreateLinkedList()
         {
-            return new DoubleLinkedList();
+            return new DoubleLinkedList<T>();
         }
     }
 }

@@ -8,15 +8,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Stack = DataStructures.Stacks.Abstracts.Stack;
 
 namespace DataStructures.Stacks
 {
-    internal class StackedList : Stack
+    internal class StackedList<T> : AbstractStack<T>
     {
         private readonly string _stackBaseType = "LinkedList";
         private readonly int _size = 0;
-        private LinkedList _stack;
+        private AbstarctLinkedList<T> _stack;
         public override int Size => this._size;
 
         public override string StackBaseType => this._stackBaseType;
@@ -29,31 +28,13 @@ namespace DataStructures.Stacks
         {
             this.top = -1;
             this._size = size;
-            this._stack = LinkedListFactory.GetLinkedList(LinkedListType.Single);
+            this._stack = LinkedListFactory<T>.GetLinkedList(LinkedListType.Single);
         }
 
         public override void Clear()
         {
             _stack.Clear();
-        }
-
-        public override string Display()
-        {
-            string stack = "";
-            if (this._stack == null)
-            {
-                throw new Exception(StackCommon.NOT_INITIALIZED);
-            }
-            else if (IsEmpty())
-            {
-                throw new Exception(StackCommon.UNDER_FLOW);
-            }
-            else
-            {
-                stack = _stack.Display();
-            }
-            return stack;
-        }
+        }        
 
         public override bool IsEmpty()
         {
@@ -65,9 +46,9 @@ namespace DataStructures.Stacks
             return (_stack.GetLength() == this._size);
         }
 
-        public override string Peak()
+        public override T Peak()
         {
-            string item = "";
+            T item;
             if (this._stack == null)
             {
                 throw new Exception(StackCommon.NOT_INITIALIZED);
@@ -83,9 +64,9 @@ namespace DataStructures.Stacks
             return item;
         }
 
-        public override string Pop()
+        public override T Pop()
         {
-            string item = "";
+            T item;
             if (this._stack == null)
             {
                 throw new Exception(StackCommon.NOT_INITIALIZED);
@@ -102,7 +83,7 @@ namespace DataStructures.Stacks
             return item;
         }
 
-        public override void Push(string item)
+        public override void Push(T item)
         {
             if (this._stack == null)
             {
@@ -120,7 +101,7 @@ namespace DataStructures.Stacks
 
         public override IEnumerator GetEnumerator()
         {
-            return new LinkedListEnumerator(this._stack);
+            return new LinkedListEnumerator<T>(this._stack);
         }
     }
 }

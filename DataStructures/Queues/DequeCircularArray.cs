@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace DataStructures.Queues
 {
-    internal class DequeCircularArray : Deque
+    internal class DequeCircularArray<T> : AbstractDeque<T>
     {
         private readonly string _dequeBaseType = "CircularArray";
         private readonly int _size = 0;
-        private string[] _deque;
+        private T[] _deque;
         public override int Size => this._size;
         public override string QueueBaseType => this._dequeBaseType;
         private DequeCircularArray()
@@ -25,19 +25,19 @@ namespace DataStructures.Queues
         {
             this.front = this.rear = -1;
             this._size = size;
-            this._deque = new string[this._size];
+            this._deque = new T[this._size];
         }
 
         public override void Clear()
         {
             this.front = this.rear = -1;
             this._deque = null;
-            this._deque = new string[this._size];
+            this._deque = new T[this._size];
         }
 
-        public override string Dequeue()
+        public override T Dequeue()
         {
-            string item = "";
+            T item;
             if (this._size == 0)
             {
                 throw new Exception(QueueCommon.NOT_INITIALIZED);
@@ -59,9 +59,9 @@ namespace DataStructures.Queues
             return item;
         }
 
-        public override string DequeueRear()
+        public override T DequeueRear()
         {
-            string item = "";
+            T item;
             if (this._size == 0)
             {
                 throw new Exception(QueueCommon.NOT_INITIALIZED);
@@ -87,30 +87,9 @@ namespace DataStructures.Queues
             }
             return item;
         }
+        
 
-        public override string Display()
-        {
-            string deque = "";
-            if (this._size == 0)
-            {
-                throw new Exception(QueueCommon.NOT_INITIALIZED);
-            }
-            else if (this.IsEmpty())
-            {
-                throw new Exception(QueueCommon.UNDER_FLOW);
-            }
-            else
-            {
-                for (int i = this.front; i != this.rear; i = (i + 1) % this._size)
-                {
-                    deque += this._deque[i];
-                    deque += (i == this.rear) ? "." : "-->";
-                }
-            }
-            return deque;
-        }
-
-        public override void Enqueue(string item)
+        public override void Enqueue(T item)
         {
             if (this._size == 0)
             {
@@ -132,7 +111,7 @@ namespace DataStructures.Queues
             }
         }
 
-        public override void EnqueueFront(string item)
+        public override void EnqueueFront(T item)
         {
             if (this._size == 0)
             {
@@ -169,9 +148,9 @@ namespace DataStructures.Queues
             return (this.front == ((this.rear + 1) % this._size));
         }
 
-        public override string Peak()
+        public override T Peak()
         {
-            string item = "";
+            T item;
             if (this._size == 0)
             {
                 throw new Exception(QueueCommon.NOT_INITIALIZED);
@@ -187,9 +166,9 @@ namespace DataStructures.Queues
             return item;
         }
 
-        public override string PeakRear()
+        public override T PeakRear()
         {
-            string item = "";
+            T item;
             if (this._size == 0)
             {
                 throw new Exception(QueueCommon.NOT_INITIALIZED);
@@ -207,7 +186,7 @@ namespace DataStructures.Queues
 
         public override IEnumerator GetEnumerator()
         {
-            return new QueueEnumerator(this._deque, this.front, this.rear, p => (p + 1) % this._size, (p, r) => p != r);
+            return new QueueEnumerator<T>(this._deque, this.front, this.rear, p => (p + 1) % this._size, (p, r) => p != r);
         }
     }
 }

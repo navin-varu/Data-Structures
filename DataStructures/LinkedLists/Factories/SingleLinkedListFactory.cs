@@ -6,13 +6,13 @@ using System.Text;
 
 namespace DataStructures.LinkedLists.Factories
 {
-    class SingleLinkedListFactory : ILinkedListFactory
+    class SingleLinkedListFactory<T> : ILinkedListFactory<T>
     {
         public LinkedListType LinkedListType => LinkedListType.Single;
 
-        public LinkedList CreateLinkedList()
+        public AbstarctLinkedList<T> CreateLinkedList()
         {
-            return new SingleLinkedList();
+            return new SingleLinkedList<T>();
         }
     }
 }

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace DataStructures.Queues.OperationContracts
 {
-    internal interface IDequeOperations : IQueueOperations
+    internal interface IDequeOperations<T> : IQueueOperations<T>
     {
-        void EnqueueFront(string item);
-        string DequeueRear();
-        string PeakRear();
+        void EnqueueFront(T item);
+        T DequeueRear();
+        T PeakRear();
     }
 }

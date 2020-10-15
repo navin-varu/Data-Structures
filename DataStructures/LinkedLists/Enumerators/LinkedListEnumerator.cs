@@ -6,12 +6,12 @@ using System.Text;
 
 namespace DataStructures.LinkedLists.Enumerators
 {
-    class LinkedListEnumerator : IEnumerator
+    class LinkedListEnumerator<T> : IEnumerator
     {
-        private readonly LinkedList _linkedList;
+        private readonly AbstarctLinkedList<T> _linkedList;
         private int _length;
         private int _position;
-        public LinkedListEnumerator(LinkedList linkedList)
+        public LinkedListEnumerator(AbstarctLinkedList<T> linkedList)
         {
             this._linkedList = linkedList;
             this._length = this._linkedList.GetLength();

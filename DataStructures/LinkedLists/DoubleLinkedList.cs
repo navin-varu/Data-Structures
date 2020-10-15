@@ -9,7 +9,7 @@ using DataStructures.LinkedLists.Enumerators;
 
 namespace DataStructures.LinkedLists
 {
-    internal class DoubleLinkedList : LinkedList
+    internal class DoubleLinkedList<T> : AbstarctLinkedList<T>
     {
         public override string LinkedListName => throw new NotImplementedException();
 
@@ -18,19 +18,15 @@ namespace DataStructures.LinkedLists
             throw new NotImplementedException();
         }
 
-        public override void Create(string[] values)
+        public override void Create(T[] values)
         {
             throw new NotImplementedException();
         }
 
-        public override string Display()
-        {
-            throw new NotImplementedException();
-        }
-
+       
         public override IEnumerator GetEnumerator()
         {
-            return new LinkedListEnumerator(this);
+            return new LinkedListEnumerator<T>(this);
         }
 
         public override int GetLength()
@@ -38,22 +34,22 @@ namespace DataStructures.LinkedLists
             throw new NotImplementedException();
         }
 
-        public override string GetValueAt(int index)
+        public override T GetValueAt(int index)
         {
             throw new NotImplementedException();
         }
 
-        public override void InsertAt(int index, string value)
+        public override void InsertAt(int index, T value)
         {
             throw new NotImplementedException();
         }
 
-        public override void InsertFirst(string value)
+        public override void InsertFirst(T value)
         {
             throw new NotImplementedException();
         }
 
-        public override void InsertLast(string value)
+        public override void InsertLast(T value)
         {
             throw new NotImplementedException();
         }

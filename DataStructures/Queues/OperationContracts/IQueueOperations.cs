@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace DataStructures.Queues.OperationContracts
 {
-    internal interface IQueueOperations: IDataStructure
+    internal interface IQueueOperations<T>: IDataStructure
     {
-        void Enqueue(string item);
-        string Dequeue();
+        void Enqueue(T item);
+        T Dequeue();
         bool IsFull();
-        string Peak();
+        T Peak();
     }
 }

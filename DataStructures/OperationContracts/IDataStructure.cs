@@ -9,6 +9,5 @@ namespace DataStructures.OperationContracts
     {
         void Clear();
         bool IsEmpty();
-        string Display();
     }
 }

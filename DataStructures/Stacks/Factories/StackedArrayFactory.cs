@@ -6,13 +6,13 @@ using System.Text;
 
 namespace DataStructures.Stacks.Factories
 {
-    class StackedArrayFactory : IStackFactory
+    class StackedArrayFactory<T> : IStackFactory<T>
     {
         public StackBase StackBase => StackBase.Array;
 
-        public Stack CreateStack(int size)
+        public AbstractStack<T> CreateStack(int size)
         {
-            return new StackedArray(size);
+            return new StackedArray<T>(size);
         }
     }
 }

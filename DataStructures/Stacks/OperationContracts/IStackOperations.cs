@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace DataStructures.Stacks.OperationContracts
 {
-    internal interface IStackOperations : IDataStructure
+    internal interface IStackOperations<T> : IDataStructure
     {
-        void Push(string item);
-        string Pop();
+        void Push(T item);
+        T Pop();
         bool IsFull();
-        string Peak();
+        T Peak();
     }
 }
