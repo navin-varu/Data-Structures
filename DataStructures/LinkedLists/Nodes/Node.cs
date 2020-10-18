@@ -17,11 +17,15 @@ namespace DataStructures.LinkedLists.Nodes
         }
     }
 
-    internal class DoubleNode<T> : Node<T>
+    internal class DoubleNode<T>
     {
-        internal Node<T> previous;
-        public DoubleNode(T data) : base(data)
+        internal T _data;
+        internal DoubleNode<T> next;
+        internal DoubleNode<T> previous;
+        public DoubleNode(T data)
         {
+            _data = data;
+            next = null;
             previous = null;
         }
     }
