@@ -23,9 +23,14 @@ namespace DataStructures.Queues.Abstracts
         public abstract void Clear();
         public abstract T Dequeue();
         public abstract void Enqueue(T item);
-        public abstract IEnumerator GetEnumerator();
+        public abstract IEnumerator<T> GetEnumerator();
         public abstract bool IsEmpty();
         public abstract bool IsFull();
         public abstract T Peak();
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

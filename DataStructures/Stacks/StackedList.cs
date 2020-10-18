@@ -15,7 +15,7 @@ namespace DataStructures.Stacks
     {
         private readonly string _stackBaseType = "LinkedList";
         private readonly int _size = 0;
-        private AbstarctLinkedList<T> _stack;
+        private AbstractLinkedList<T> _stack;
         public override int Size => this._size;
 
         public override string StackBaseType => this._stackBaseType;
@@ -28,7 +28,7 @@ namespace DataStructures.Stacks
         {
             this.top = -1;
             this._size = size;
-            this._stack = LinkedListFactory<T>.GetLinkedList(LinkedListType.Single);
+            this._stack = LinkedListFactory<T>.GetFactory.Load(LinkedListType.Single).CreateLinkedList();
         }
 
         public override void Clear()
@@ -99,7 +99,7 @@ namespace DataStructures.Stacks
             }
         }
 
-        public override IEnumerator GetEnumerator()
+        public override IEnumerator<T> GetEnumerator()
         {
             return new LinkedListEnumerator<T>(this._stack);
         }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataStructures.Queues.Enumerators
 {
-    internal class QueueEnumerator<T> : IEnumerator
+    internal class QueueEnumerator<T> : IEnumerator<T>
     {
         private readonly T[] _queue;
         private int _front = 0, _rear = 0;
@@ -22,13 +22,15 @@ namespace DataStructures.Queues.Enumerators
             this._incrementer = incrementer;
             this._condition = condition;
         }
-        public object Current
+        public T Current
         {
             get
             {
                 return this._queue[this._position];
             }
         }
+
+        object IEnumerator.Current => Current;
 
         public bool MoveNext()
         {
@@ -40,5 +42,41 @@ namespace DataStructures.Queues.Enumerators
         {
             this._position = this._front - 1;
         }
+
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects).
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                // TODO: set large fields to null.
+
+                disposedValue = true;
+            }
+        }
+
+        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+        // ~QueueEnumerator()
+        // {
+        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+        //   Dispose(false);
+        // }
+
+        // This code added to correctly implement the disposable pattern.
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            // TODO: uncomment the following line if the finalizer is overridden above.
+            // GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }

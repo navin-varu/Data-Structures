@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataStructures.Stacks.OperationContracts
 {
-    internal interface IStackOperations<T> : IDataStructure
+    internal interface IStackOperations<T> : IDataStructure<T>
     {
         void Push(T item);
         T Pop();

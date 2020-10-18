@@ -10,7 +10,7 @@ namespace DataStructures.LinkedLists.Factories
     {
         public LinkedListType LinkedListType => LinkedListType.Double;
 
-        public AbstarctLinkedList<T> CreateLinkedList()
+        public AbstractLinkedList<T> CreateLinkedList()
         {
             return new DoubleLinkedList<T>();
         }

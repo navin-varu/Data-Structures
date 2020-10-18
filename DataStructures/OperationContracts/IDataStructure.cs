@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataStructures.OperationContracts
 {
-    public interface IDataStructure : IEnumerable
+    public interface IDataStructure<T> : IEnumerable<T>
     {
         void Clear();
         bool IsEmpty();

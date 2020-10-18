@@ -10,7 +10,7 @@ using DataStructures.LinkedLists.Nodes;
 
 namespace DataStructures.LinkedLists
 {
-    internal class SingleLinkedList<T> : AbstarctLinkedList<T>
+    internal class SingleLinkedList<T> : AbstractLinkedList<T>
     {
         Node<T> head = null;
         private readonly string _linkedListName = "Single";
@@ -228,7 +228,7 @@ namespace DataStructures.LinkedLists
             }
         }
 
-        public override IEnumerator GetEnumerator()
+        public override IEnumerator<T> GetEnumerator()
         {
             return new LinkedListEnumerator<T>(this);
         }

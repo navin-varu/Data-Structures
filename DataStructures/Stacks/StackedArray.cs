@@ -97,7 +97,7 @@ namespace DataStructures.Stacks
             }
         }
 
-        public override IEnumerator GetEnumerator()
+        public override IEnumerator<T> GetEnumerator()
         {
             return new StackEnumerator<T>(this._stack, this.top);
         }

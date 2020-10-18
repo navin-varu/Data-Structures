@@ -10,7 +10,7 @@ namespace DataStructures.LinkedLists.Factories
     {
         public LinkedListType LinkedListType => LinkedListType.DoubleCircular;
 
-        public AbstarctLinkedList<T> CreateLinkedList()
+        public AbstractLinkedList<T> CreateLinkedList()
         {
             return new DoubleCircularLinkedList<T>();
         }

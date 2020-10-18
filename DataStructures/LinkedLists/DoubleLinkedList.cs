@@ -6,32 +6,49 @@ using System.Text;
 using System.Threading.Tasks;
 using DataStructures.LinkedLists.Abstracts;
 using DataStructures.LinkedLists.Enumerators;
+using DataStructures.LinkedLists.Nodes;
 
 namespace DataStructures.LinkedLists
 {
-    internal class DoubleLinkedList<T> : AbstarctLinkedList<T>
+    internal class DoubleLinkedList<T> : AbstractLinkedList<T>
     {
-        public override string LinkedListName => throw new NotImplementedException();
+        DoubleNode<T> head = null;
+        private readonly string _linkedListName = "Double";
+        public override string LinkedListName => _linkedListName;
 
         public override void Clear()
         {
-            throw new NotImplementedException();
+            head = null;
         }
 
         public override void Create(T[] values)
         {
-            throw new NotImplementedException();
+            head = null;
+            foreach (T value in values)
+            {
+                InsertLast(value);
+            }
         }
 
        
-        public override IEnumerator GetEnumerator()
+        public override IEnumerator<T> GetEnumerator()
         {
             return new LinkedListEnumerator<T>(this);
         }
 
         public override int GetLength()
         {
-            throw new NotImplementedException();
+            int count = 0;
+            if (head != null)
+            {
+                Node<T> current = head;
+                do
+                {
+                    count++;
+                    current = current.next;
+                } while (current != null);
+            }
+            return count;
         }
 
         public override T GetValueAt(int index)

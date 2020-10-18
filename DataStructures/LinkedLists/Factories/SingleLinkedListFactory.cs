@@ -10,7 +10,7 @@ namespace DataStructures.LinkedLists.Factories
     {
         public LinkedListType LinkedListType => LinkedListType.Single;
 
-        public AbstarctLinkedList<T> CreateLinkedList()
+        public AbstractLinkedList<T> CreateLinkedList()
         {
             return new SingleLinkedList<T>();
         }

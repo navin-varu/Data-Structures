@@ -19,13 +19,13 @@ namespace DataStructures.LinkedLists.Abstracts
     /// <summary>
     /// Provides a base implementation for the extensible linked list model.
     /// </summary>
-    public abstract class AbstarctLinkedList<T> : ILinkedListOperations<T>
+    public abstract class AbstractLinkedList<T> : ILinkedListOperations<T>
     {
         internal int Length = 0;
         public abstract string LinkedListName { get; }
         public abstract void Clear();
         public abstract void Create(T[] values);
-        public abstract IEnumerator GetEnumerator();
+        public abstract IEnumerator<T> GetEnumerator();
         public abstract int GetLength();
         public abstract T GetValueAt(int index);
         public abstract void InsertAt(int index, T value);
@@ -36,5 +36,10 @@ namespace DataStructures.LinkedLists.Abstracts
         public abstract void RemoveFirst();
         public abstract void RemoveLast();
         public abstract void Reverse();
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

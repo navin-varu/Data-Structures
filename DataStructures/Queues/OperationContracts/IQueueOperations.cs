@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataStructures.Queues.OperationContracts
 {
-    internal interface IQueueOperations<T>: IDataStructure
+    internal interface IQueueOperations<T>: IDataStructure<T>
     {
         void Enqueue(T item);
         T Dequeue();

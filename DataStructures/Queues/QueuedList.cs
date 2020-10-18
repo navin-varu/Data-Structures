@@ -15,7 +15,7 @@ namespace DataStructures.Queues
     {
         private readonly string _queueBaseType = "LinkedList";
         private readonly int _size = 0;
-        private AbstarctLinkedList<T> _queue;
+        private AbstractLinkedList<T> _queue;
         public override int Size => this._size;
         public override string QueueBaseType => this._queueBaseType;
         private QueuedList()
@@ -26,7 +26,7 @@ namespace DataStructures.Queues
         public QueuedList(int size)
         {
             this._size = size;
-            this._queue = LinkedListFactory<T>.GetLinkedList(LinkedListType.Single);
+            this._queue = LinkedListFactory<T>.GetFactory.Load(LinkedListType.Single).CreateLinkedList();
         }
         public override void Clear()
         {
@@ -96,7 +96,7 @@ namespace DataStructures.Queues
             return item;
         }
 
-        public override IEnumerator GetEnumerator()
+        public override IEnumerator<T> GetEnumerator()
         {
             return new LinkedListEnumerator<T>(this._queue);
         }

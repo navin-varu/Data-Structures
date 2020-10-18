@@ -9,7 +9,7 @@ using DataStructures.LinkedLists.Enumerators;
 
 namespace DataStructures.LinkedLists
 {
-    internal class DoubleCircularLinkedList<T> : AbstarctLinkedList<T>
+    internal class DoubleCircularLinkedList<T> : AbstractLinkedList<T>
     {
         public override string LinkedListName => throw new NotImplementedException();
 
@@ -23,7 +23,7 @@ namespace DataStructures.LinkedLists
             throw new NotImplementedException();
         }        
 
-        public override IEnumerator GetEnumerator()
+        public override IEnumerator<T> GetEnumerator()
         {
             return new LinkedListEnumerator<T>(this);
         }

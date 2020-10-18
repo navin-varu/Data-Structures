@@ -19,11 +19,16 @@ namespace DataStructures.Stacks.Abstracts
         public abstract int Size { get; }
         public abstract string StackBaseType { get; }
         public abstract void Clear();
-        public abstract IEnumerator GetEnumerator();
+        public abstract IEnumerator<T> GetEnumerator();
         public abstract bool IsEmpty();
         public abstract bool IsFull();
         public abstract T Peak();
         public abstract T Pop();
         public abstract void Push(T item);
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

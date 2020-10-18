@@ -110,7 +110,7 @@ namespace DataStructures.Queues
             return item;
         }
 
-        public override IEnumerator GetEnumerator()
+        public override IEnumerator<T> GetEnumerator()
         {
             return new QueueEnumerator<T>(this._queue, this.front, this.rear, p => (p + 1) % this._size, (p, r) => p != r);
         }

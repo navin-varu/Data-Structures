@@ -10,7 +10,7 @@ namespace DataStructures.LinkedLists.OperationContracts
     /// <summary>
     /// 
     /// </summary>
-    internal interface ILinkedListOperations<T>: IDataStructure
+    internal interface ILinkedListOperations<T>: IDataStructure<T>
     {
         void InsertFirst(T value);
         void InsertLast(T value);

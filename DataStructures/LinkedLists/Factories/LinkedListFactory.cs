@@ -13,7 +13,8 @@ namespace DataStructures.LinkedLists.Factories
     {
         private readonly Dictionary<LinkedListType, ILinkedListFactory<T>> _factories;
         private static readonly Lazy<LinkedListFactory<T>> _linkedListFactory = new Lazy<LinkedListFactory<T>>(() => new LinkedListFactory<T>());
-        public LinkedListFactory()
+
+        private LinkedListFactory()
         {
             _factories = new Dictionary<LinkedListType, ILinkedListFactory<T>>();
             InitializeFactories();
@@ -27,17 +28,22 @@ namespace DataStructures.LinkedLists.Factories
         }
         private void InitializeFactories()
         {
-            Type[] factoryTypes = Assembly.GetExecutingAssembly().GetTypes();
+            var factoryTypes = Assembly.GetExecutingAssembly().GetTypes();
             foreach(Type factoryType in factoryTypes)
             {
-                if (factoryType.GetInterface(typeof(ILinkedListFactory<T>).ToString()) != null)
+                if (factoryType.GetInterface(typeof(ILinkedListFactory).ToString()) != null)
                 {
-                    ILinkedListFactory<T> linkedListFactory = Activator.CreateInstance(factoryType) as ILinkedListFactory<T>;
-                    if (linkedListFactory != null)
+                    if (!factoryType.IsInterface)
                     {
-                        if (!_factories.ContainsKey(linkedListFactory.LinkedListType))
+                        Type[] typeArgs = { typeof(T) };
+                        Type genericFactoryType = factoryType.MakeGenericType(typeArgs);
+                        ILinkedListFactory<T> linkedListFactory = Activator.CreateInstance(genericFactoryType) as ILinkedListFactory<T>;
+                        if (linkedListFactory != null)
                         {
-                            _factories.Add(linkedListFactory.LinkedListType, linkedListFactory);
+                            if (!_factories.ContainsKey(linkedListFactory.LinkedListType))
+                            {
+                                _factories.Add(linkedListFactory.LinkedListType, linkedListFactory);
+                            }
                         }
                     }
                 }
@@ -47,29 +53,6 @@ namespace DataStructures.LinkedLists.Factories
         public ILinkedListFactory<T> Load(LinkedListType linkedListType)
         {
             return this._factories[linkedListType];
-        }
-        public static AbstarctLinkedList<T> GetLinkedList(LinkedListType linkedListType)
-        {
-            AbstarctLinkedList<T> linkedList;
-            switch (linkedListType)
-            {
-                case LinkedListType.Single:
-                    linkedList = new SingleLinkedList<T>();
-                    break;
-                case LinkedListType.Circular:
-                    linkedList = new CircularLinkedList<T>();
-                    break;
-                case LinkedListType.Double:
-                    linkedList = new DoubleLinkedList<T>();
-                    break;
-                case LinkedListType.DoubleCircular:
-                    linkedList = new DoubleCircularLinkedList<T>();
-                    break;
-                default:
-                    linkedList = null;
-                    break;
-            }
-            return linkedList;
-        }
+        }       
     }
 }

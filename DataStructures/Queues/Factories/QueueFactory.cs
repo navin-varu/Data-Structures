@@ -48,25 +48,5 @@ namespace DataStructures.Queues.Factories
         {
             return this._factories[queueBase];
         }
-        public static AbstractQueue<T> GetQueue(QueueBase queueBase, int size)
-        {
-            AbstractQueue<T> queue;
-            switch (queueBase)
-            {
-                case QueueBase.Array:
-                    queue = new QueuedArray<T>(size);
-                    break;
-                case QueueBase.CircularArray:
-                    queue = new QueuedCircularArray<T>(size);
-                    break;
-                case QueueBase.LinkedList:
-                    queue = new QueuedList<T>(size);
-                    break;
-                default:
-                    queue = null;
-                    break;
-            }
-            return queue;
-        }
     }
 }

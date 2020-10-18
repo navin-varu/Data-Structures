@@ -109,7 +109,7 @@ namespace DataStructures.Queues
             }
         }
 
-        public override IEnumerator GetEnumerator()
+        public override IEnumerator<T> GetEnumerator()
         {
             throw new NotImplementedException();
         }

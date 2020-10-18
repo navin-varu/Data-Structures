@@ -10,7 +10,7 @@ using DataStructures.LinkedLists.Nodes;
 
 namespace DataStructures.LinkedLists
 {
-    internal class CircularLinkedList<T> : AbstarctLinkedList<T>
+    internal class CircularLinkedList<T> : AbstractLinkedList<T>
     {
         Node<T> tail = null;
         private readonly string _linkedListName = "Circular";
@@ -30,7 +30,7 @@ namespace DataStructures.LinkedLists
             }
         }
 
-       
+
         public override int GetLength()
         {
             int count = 0;
@@ -125,7 +125,7 @@ namespace DataStructures.LinkedLists
             Node<T> newNode = new Node<T>(value);
             if (tail == null)
             {
-                newNode.next =  newNode;
+                newNode.next = newNode;
             }
             else
             {
@@ -216,20 +216,21 @@ namespace DataStructures.LinkedLists
             else if (tail.next != tail)
             {
                 Node<T> current = tail.next;
-                Node<T> previous = tail, nextNode = null;
-                while (current != tail.next)
+                Node<T> nextNode = current.next, previous = null;
+                while (current != tail)
                 {
-                    nextNode = current.next;
-                    current.next = previous;
                     previous = current;
                     current = nextNode;
+                    nextNode = current.next;
+                    current.next = previous;
 
                 }
-                tail = previous;
+                nextNode.next = tail;
+                tail = nextNode;
             }
         }
 
-        public override IEnumerator GetEnumerator()
+        public override IEnumerator<T> GetEnumerator()
         {
             return new LinkedListEnumerator<T>(this);
         }

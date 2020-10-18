@@ -4,9 +4,14 @@ using DataStructures.LinkedLists.Abstracts;
 
 namespace DataStructures.LinkedLists.Factories.OperationContracts
 {
-    public interface ILinkedListFactory<T>
+    public interface ILinkedListFactory<T>: ILinkedListFactory
     {
         LinkedListType LinkedListType { get; }
-        AbstarctLinkedList<T> CreateLinkedList();
+        AbstractLinkedList<T> CreateLinkedList();
+    }
+
+    public interface ILinkedListFactory
+    {
+      
     }
 }
